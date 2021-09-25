@@ -226,6 +226,10 @@ int32 scriptlib::duel_set_lp(lua_State *L) {
 	if(p != 0 && p != 1)
 		return 0;
 	duel* pduel = interpreter::get_duel_info(L);
+	//////////kdiy/////////
+    if (lp > 2000000)
+	    lp = 8888888;
+    //////////kdiy/////////	
 	pduel->game_field->player[p].lp = lp;
 	pduel->write_buffer8(MSG_LPUPDATE);
 	pduel->write_buffer8(p);

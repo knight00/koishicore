@@ -48,6 +48,9 @@ interpreter::interpreter(duel* pd): coroutines(256) {
 	//extra scripts
 	load_script("./script/constant.lua");
 	load_script("./script/utility.lua");
+	/////kdiy///////
+	load_script("./script/proc_fun.lua");
+	/////kdiy///////
 	//load kpro constant
 	//card data constants
 	lua_pushinteger(lua_state, CARDDATA_CODE);
@@ -120,6 +123,8 @@ interpreter::interpreter(duel* pd): coroutines(256) {
 	lua_setglobal(lua_state, "HINT_SOUND");
 	lua_pushinteger(lua_state, HINT_MUSIC_OGG);
 	lua_setglobal(lua_state, "HINT_MUSIC_OGG");
+	/////kdiy///////
+	/////kdiy///////
 	//detect operating system
 #ifdef _WIN32
 	lua_pushboolean(lua_state, 1);

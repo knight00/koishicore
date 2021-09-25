@@ -475,6 +475,10 @@ inline effect_flag operator|(effect_flag flag1, effect_flag flag2)
 #define EFFECT_OVERLAY_RITUAL_MATERIAL	364
 #define EFFECT_CHANGE_GRAVE_ATTRIBUTE	365
 #define EFFECT_CHANGE_GRAVE_RACE		366
+//////////kdiy/////////
+#define EFFECT_INF_ATTACK                   500
+#define EFFECT_INF_DEFENSE                  501
+//////////kdiy/////////
 
 #define EVENT_STARTUP		1000
 #define EVENT_FLIP			1001

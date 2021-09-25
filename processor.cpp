@@ -3321,12 +3321,22 @@ void field::calculate_battle_damage(effect** pdamchange, card** preason_card, ui
 			d = da;
 			if(a > d) {
 				damp = pd;
-				core.battle_damage[damp] = a - d;
+				//////////kdiy/////////
+				//core.battle_damage[damp] = a - d;
+				if ((a >= 8888888 && d < 8888888) || (a >= 9999999 && d < 9999999))
+					core.battle_damage[damp] = 8888888;
+				else core.battle_damage[damp] = a - d;
+				//////////kdiy/////////
 				reason_card = core.attacker;
 				bd[1] = TRUE;
 			} else if(a < d) {
 				damp = pa;
-				core.battle_damage[damp] = d - a;
+				//////////kdiy/////////
+				//core.battle_damage[damp] = d - a;
+				if ((d >= 8888888 && a < 8888888) || (d >= 9999999 && a < 9999999))
+					core.battle_damage[damp] = 8888888;
+				else core.battle_damage[damp] = d - a;
+				//////////kdiy/////////		
 				reason_card = core.attack_target;
 				bd[0] = TRUE;
 			} else {
@@ -3346,9 +3356,23 @@ void field::calculate_battle_damage(effect** pdamchange, card** preason_card, ui
 					for(int32 i = 0; i < eset.size(); ++i)
 						dp[1 - eset[i]->get_handler_player()] = 1;
 					if(dp[0])
-						core.battle_damage[0] = a - d;
+					//////////kdiy/////////
+					    //core.battle_damage[0] = a - d;
+					{
+						if ((a >= 8888888 && d < 8888888) || (a >= 9999999 && d < 9999999))
+							core.battle_damage[0] = 8888888;
+				        else core.battle_damage[0] = a - d;
+					}
+					//////////kdiy/////////		
 					if(dp[1])
-						core.battle_damage[1] = a - d;
+					//////////kdiy/////////	
+					    //core.battle_damage[1] = a - d;
+					{
+						if ((a >= 8888888 && d < 8888888) || (a >= 9999999 && d != 9999999))
+							core.battle_damage[1] = 8888888;
+				        else core.battle_damage[1] = a - d;
+					}
+					//////////kdiy/////////	
 					bool double_damage = false;
 					//bool half_damage = false;
 					for(int32 i = 0; i < eset.size(); ++i) {
@@ -3363,9 +3387,23 @@ void field::calculate_battle_damage(effect** pdamchange, card** preason_card, ui
 					//}
 					if(double_damage) {
 						if(dp[0])
-							core.battle_damage[0] *= 2;
+						////////kdiy////////
+						//core.battle_damage[0] *= 2;
+						{
+							if (core.battle_damage[0] >= 8888888)
+								core.battle_damage[0] = 8888888;
+				            else core.battle_damage[0] *= 2;
+						}
+						////////kdiy////////
 						if(dp[1])
-							core.battle_damage[1] *= 2;
+						///////kdiy////////
+						//core.battle_damage[1] *= 2;
+						{
+							if (core.battle_damage[1] >= 8888888)
+								core.battle_damage[1] = 8888888;
+				            else core.battle_damage[1] *= 2;
+						}
+						////////kdiy////////
 					}
 					//if(half_damage) {
 					//	if(dp[0])
@@ -3462,9 +3500,23 @@ void field::calculate_battle_damage(effect** pdamchange, card** preason_card, ui
 							half_dam = false;
 						}
 						if(double_dam)
-							core.battle_damage[p] *= 2;
+						////////kdiy////////
+						//core.battle_damage[p] *= 2;
+						{
+							if (core.battle_damage[p] >= 8888888)
+								core.battle_damage[p] = 8888888;
+							else core.battle_damage[p] *= 2;
+						}
+						////////kdiy////////	
 						if(half_dam)
-							core.battle_damage[p] /= 2;
+						////////kdiy////////
+						//core.battle_damage[p] /= 2;
+						{
+							if (core.battle_damage[p] >= 8888888)
+								core.battle_damage[p] = 8888888;
+							else core.battle_damage[p] /= 2;
+						}
+						////////kdiy////////	
 						if(dam_value >= 0 && core.battle_damage[p] > 0)
 							core.battle_damage[p] = dam_value;
 					}
@@ -3481,14 +3533,24 @@ void field::calculate_battle_damage(effect** pdamchange, card** preason_card, ui
 				bd[1] = TRUE;
 			} else if(a < d) {
 				damp = pa;
-				core.battle_damage[damp] = d - a;
+				//////////kdiy/////////
+				//core.battle_damage[damp] = d - a;
+				if ((d >= 8888888 && a < 8888888) || (d >= 9999999 && a < 9999999))
+					core.battle_damage[damp] = 8888888;
+				else core.battle_damage[damp] = d - a;
+				//////////kdiy/////////		
 				reason_card = core.attack_target;
 			}
 		}
 	} else {
 		if(a != 0) {
 			damp = 1 - pa;
-			core.battle_damage[damp] = a;
+			//////////kdiy/////////	
+			//core.battle_damage[damp] = a;
+			if (a >= 8888888)
+				core.battle_damage[damp] = 8888888;
+			else core.battle_damage[damp] = a;
+			//////////kdiy/////////	
 			reason_card = core.attacker;
 		}
 	}
@@ -3582,9 +3644,23 @@ void field::calculate_battle_damage(effect** pdamchange, card** preason_card, ui
 				half_dam = false;
 			}
 			if(double_dam)
-				core.battle_damage[p] *= 2;
+			    /////kdiy//////////
+				//core.battle_damage[p] *= 2;	
+				{
+				if (core.battle_damage[p] >= 8888888)
+					core.battle_damage[p] = 8888888;
+				else core.battle_damage[p] *= 2;
+				}			
+                /////kdiy//////////
 			if(half_dam)
-				core.battle_damage[p] /= 2;
+			    /////kdiy//////////
+				//core.battle_damage[p] /= 2;
+				{
+				if (core.battle_damage[p] >= 8888888)
+					core.battle_damage[p] = 8888888;
+				else core.battle_damage[p] /= 2;	
+				}		
+				/////kdiy//////////		
 			if(dam_value >= 0 && core.battle_damage[p] > 0)
 				core.battle_damage[p] = dam_value;
 		}
